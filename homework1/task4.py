@@ -1,12 +1,15 @@
 from typing import List
+from collections import defaultdict
 
 
 def check_sum_of_four(a: List[int], b: List[int], c: List[int], d: List[int]) -> int:
-    n = 0
-    for i in range(len(a)):
-        for j in range(len(b)):
-            for k in range(len(c)):
-                for l in range(len(d)):
-                    if a[i]+b[j]+c[k]+d[l] == 0:
-                        n += 1
-    return n
+    sum_ab = defaultdict(int)
+    for a_i in a:
+        for b_i in b:
+            sum_ab[a_i + b_i] += 1
+    ans = 0
+    for c_i in c:
+        for d_i in d:
+            ans += sum_ab[-c_i - d_i]
+    return ans
+
