@@ -22,4 +22,4 @@ def test_own():
     stop = 10
     a = cache_func(stop)
     b = cache_func(stop)
-    assert a == b
+    assert a is b
