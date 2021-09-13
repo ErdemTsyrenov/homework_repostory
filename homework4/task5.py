@@ -13,11 +13,11 @@ Definition of done:
 """
 
 
-def divisible(n, div):
+def divisible(n: int, div: int):
     return n % div == 0
 
 
-def fizzbuzz(n):
+def fizzbuzz(n: int):
     '''
     >>> list(fizzbuzz(5))
     ['1', '2', 'fizz', '4', 'buzz']

@@ -19,7 +19,7 @@ assert fizzbuzz(5) == ["1", "2", "fizz", "4", "buzz"]
 from typing import List
 
 
-def replace_fizz_buzz(num):
+def replace_fizz_buzz(num: int):
     result = ''
     if num % 3 == 0:
         result += 'fizz'
