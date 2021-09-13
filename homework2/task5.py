@@ -1,4 +1,7 @@
-def custom_range(iterable, start, stop=None, step=1):
+from typing import Iterable
+
+
+def custom_range(iterable: Iterable, start: int, stop=None, step=1):
     def inner_one_arg(iterable, stop=None):
         result = []
         for item in iterable:

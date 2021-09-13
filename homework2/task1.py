@@ -6,13 +6,12 @@ Given a file containing text. Complete using only default collections:
     4) Count every non ascii char
     5) Find most common non ascii char for document
 """
-
+from collections import defaultdict
 from typing import List
 from unicodedata import category
-from collections import defaultdict
 
 
-def read_chars(word, with_punctuation=True):
+def read_chars(word: str, with_punctuation=True):
     chars = []
     is_unicode = False
     len_unicode = 0
@@ -44,7 +43,7 @@ def read_chars(word, with_punctuation=True):
     return chars
 
 
-def is_unique(chars):
+def is_unique(chars: List[str]):
     if len(chars) == 0:
         return False
     return len(chars) == len(set(chars))

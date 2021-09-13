@@ -1,7 +1,7 @@
 from homework2.task4 import cache
 
 
-def func(a, b):
+def func(a: int, b: int):
     return (a ** b) ** 2
 
 
@@ -13,7 +13,7 @@ def test_default():
     assert val1 is val2
 
 
-def build_list_range(stop):
+def build_list_range(stop: int):
     return list(range(stop))
 
 
