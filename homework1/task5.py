@@ -1,12 +1,13 @@
+from heapq import heappop, heappush
 from typing import List
-from heapq import *
+
 
 def find_maximal_subarray_sum(nums: List[int], k: int) -> int:
     sums = []
-    current_sum = 0    
+    current_sum = 0
     heappush(sums, (0, -1))
     max_sum = -1e9
-    for  i, elem in enumerate(nums):
+    for i, elem in enumerate(nums):
         current_sum += elem
         while sums[0][1] < i - k:
             heappop(sums)

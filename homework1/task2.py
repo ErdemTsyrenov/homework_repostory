@@ -1,5 +1,6 @@
 from typing import Sequence
 
+
 def build_fibonacci(x):
     fib_seq = [0, 1]
     current = 0
@@ -27,7 +28,7 @@ def check_fibonacci(data: Sequence[int]) -> bool:
     start_pos = find_start(fib_seq, data)
     if start_pos == -1:
         return False
-        
+
     for i in range(len(data)):
         if data[i] != fib_seq[start_pos + i]:
             return False
