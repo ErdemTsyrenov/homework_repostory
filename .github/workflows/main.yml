@@ -16,5 +16,7 @@ jobs:
       - name: Run script
         run: |
           pip install flake8 pytest
+          ls -al
+          isort --check .
           flake8 .
           py.test tests
