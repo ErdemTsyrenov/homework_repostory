@@ -7,9 +7,9 @@ Given a file containing text. Complete using only default collections:
     5) Find most common non ascii char for document
 """
 
+from collections import defaultdict
 from typing import List
 from unicodedata import category
-from collections import defaultdict
 
 
 def read_chars(word, with_punctuation=True):

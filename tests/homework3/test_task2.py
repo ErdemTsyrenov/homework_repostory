@@ -1,4 +1,5 @@
 import time
+
 from homework3.task2 import calculate_total
 
 
