@@ -24,11 +24,12 @@ def f():
 ? 2
 '2'
 """
+from typing import Callable
 
 
 def cache(times=1):
 
-    def wrapped(f):
+    def wrapped(f: Callable):
         memory = dict()
 
         def inner(*args):

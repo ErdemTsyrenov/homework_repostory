@@ -55,15 +55,16 @@ sample_data  =  [
 # There are multiple bugs in this code. Find them all and write
 tests for faulty cases.
 """
+from typing import Callable, Dict, List
 
 
 class Filter:
     # Helper filter class. Accepts a list of single-argument
     # functions that return True if object in list conforms to some criteria
-    def __init__(self, functions):
+    def __init__(self, functions: List[Callable]):
         self.functions = functions
 
-    def apply(self, data):
+    def apply(self, data: List[Dict]):
         return [
             item for item in data
             if all(f(item) for f in self.functions)
