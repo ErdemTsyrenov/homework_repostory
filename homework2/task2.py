@@ -11,14 +11,12 @@ Example 2:
 Input: [2,2,1,1,1,2,2]
 Output: 2, 1
 """
-from collections import defaultdict
+from collections import Counter
 from typing import List, Tuple
 
 
 def major_and_minor_elem(inp: List) -> Tuple[int, int]:
-    elem_count = defaultdict(int)
-    for elem in inp:
-        elem_count[elem] += 1
+    elem_count = Counter(inp)
     minor = inp[0]
     major = inp[0]
     for elem in elem_count:
@@ -26,4 +24,4 @@ def major_and_minor_elem(inp: List) -> Tuple[int, int]:
             minor = elem
         if elem_count[elem] > len(inp) // 2:
             major = elem
-    return (major, minor)
+    return major, minor

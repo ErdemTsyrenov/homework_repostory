@@ -14,11 +14,12 @@ from typing import Callable
 
 
 def cache(func: Callable) -> Callable:
-    memory = dict()
+    memory = []
 
-    def inner(*args):
-        if args not in memory:
-            memory[args] = func(*args)
-        return memory[args]
-
+    def inner(*args, **kwargs):
+        if (args, kwargs) not in memory:
+            memory.append(((args, kwargs), func(*args, **kwargs)))
+        for elem in memory:
+            if elem[0] == (args, kwargs):
+                return elem[1]
     return inner
