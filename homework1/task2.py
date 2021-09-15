@@ -1,7 +1,7 @@
 from typing import Sequence
 
 
-def build_fibonacci(x):
+def build_fibonacci(x: int):
     fib_seq = [0, 1]
     current = 0
     while current < x:
@@ -10,7 +10,7 @@ def build_fibonacci(x):
     return fib_seq
 
 
-def find_start(fib_seq, data):
+def find_start(fib_seq: Sequence[int], data: Sequence[int]):
     ans = -1
     for i in range(len(fib_seq)):
         if fib_seq[i] == data[0]:

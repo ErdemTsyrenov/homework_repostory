@@ -1,15 +1,21 @@
+import pytest
+
 from homework1.task1 import check_power_of_2
 
 
-def test_positive_case():
+@pytest.mark.parametrize(
+        'test_input, expected',
+        [(65536, True), [2, True], [1, True]]
+)
+def test_positive_case(test_input, expected):
     """Testing that actual powers of 2 give True"""
-    assert check_power_of_2(65536)
-    assert check_power_of_2(2)
-    assert check_power_of_2(1)
+    assert check_power_of_2(test_input) == expected
 
 
-def test_negative_case():
+@pytest.mark.parametrize(
+        'test_input, expected',
+        [(12, False), [3, False], [0, False]]
+)
+def test_negative_case(test_input, expected):
     """Testing that non-powers of 2 give False"""
-    assert not check_power_of_2(12)
-    assert not check_power_of_2(3)
-    assert not check_power_of_2(0)
+    assert check_power_of_2(test_input) == expected
