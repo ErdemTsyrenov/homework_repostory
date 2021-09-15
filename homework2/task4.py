@@ -13,11 +13,17 @@ assert val_1 is val_2
 from typing import Callable
 
 
+def in_list(elem, List):
+    for item in List:
+        if item[0] == elem:
+            return True
+    return False
+
 def cache(func: Callable) -> Callable:
     memory = []
 
     def inner(*args, **kwargs):
-        if (args, kwargs) not in memory:
+        if not in_list((args, kwargs), memory):
             memory.append(((args, kwargs), func(*args, **kwargs)))
         for elem in memory:
             if elem[0] == (args, kwargs):
