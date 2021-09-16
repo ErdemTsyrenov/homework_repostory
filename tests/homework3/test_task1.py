@@ -2,34 +2,42 @@ from homework3.task1 import cache
 
 
 def test_int_value_cache_two_times():
+    num_calls = 0
+
     @cache(2)
     def f(a, b):
-        return (a, b)
+        nonlocal num_calls
+        num_calls += 1
+        return a, a+b
 
     some = (1, 2)
-    res1 = f(*some)
-    res2 = f(*some)
-    res3 = f(*some)
-    res4 = f(*some)
-    res5 = f(*some)
-    assert res1 is res2
-    assert res2 is res3
-    assert not (res3 is res4)
-    assert res4 is res5
+    [f(*some) for i in range(4)]
+    assert num_calls == 2
 
 
 def test_int_value_cache_zero_times():
+    num_calls = 0
+
     @cache(0)
-    def f(a, b):
-        return {a, b}
+    def f(a, b, c='Hello'):
+        nonlocal num_calls
+        num_calls += 1
+        return {a, b, c}
 
     some = (1, 2)
-    res1 = f(*some)
-    res2 = f(*some)
-    res3 = f(*some)
-    res4 = f(*some)
-    res5 = f(*some)
-    assert not (res1 is res2)
-    assert not (res2 is res3)
-    assert not (res3 is res4)
-    assert not (res4 is res5)
+    [f(*some) for i in range(5)]
+    assert num_calls == 5
+
+
+def test_int_value_cache_three_times():
+    num_calls = 0
+
+    @cache(3)
+    def f(a, b):
+        nonlocal num_calls
+        num_calls += 1
+        return a**(a+b)
+
+    some = (1, 2)
+    [f(*some) for i in range(9)]
+    assert num_calls == 3

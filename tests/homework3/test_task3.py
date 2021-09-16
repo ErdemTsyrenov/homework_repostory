@@ -1,31 +1,36 @@
+import pytest
+
 from homework3.task3 import make_filter
 
+sample_data = [
+    {
+        "name": "Bill",
+        "last_name": "Gilbert",
+        "occupation": "was here",
+        "type": "person",
+    },
+    {
+        "is_dead": True,
+        "kind": "parrot",
+        "type": "bird",
+        "name": "polly"
+    }
+]
 
-def test_default():
-    sample_data = [
-         {
-             "name": "Bill",
-             "last_name": "Gilbert",
-             "occupation": "was here",
-             "type": "person",
-         },
-         {
-             "is_dead": True,
-             "kind": "parrot",
-             "type": "bird",
-             "name": "polly"
-         }
-    ]
-    assert make_filter(name='polly', type='bird').apply(sample_data) == \
-           [sample_data[1]]
-    assert \
-        make_filter(last_name='Gilbert', type='person').apply(sample_data) == \
-        [sample_data[0]]
-    assert \
-        make_filter(last_name='Gilbert', type='bird').apply(sample_data) == \
-        []
-    assert \
-        make_filter(type='bird', occupation='was here').apply(sample_data) == \
-        []
-    assert make_filter(title='bird', home='was here').apply(sample_data) == \
-           []
+
+@pytest.mark.parametrize('keys, answer', [
+        ({'name': 'Bill', 'type': 'person'}, [sample_data[0]]),
+        ({'kind': 'parrot', 'type': 'bird'}, [sample_data[1]])
+])
+def test_exist_keys(keys, answer):
+    assert make_filter(**keys).apply(sample_data) == answer
+
+
+@pytest.mark.parametrize('keys, answer', [
+        ({'last_name': 'Gilbert', 'type': 'dog'}, []),
+        ({'type': 'bird', 'occupation': 'was here'}, []),
+        ({'last_name': 'Gilbert', 'type': 'bird'}, []),
+        ({'type': 'bird', 'home': 'was here'}, []),
+])
+def test_non_exist_keys(keys, answer):
+    assert make_filter(**keys).apply(sample_data) == answer
