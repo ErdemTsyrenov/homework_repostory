@@ -1,25 +1,27 @@
 from homework2.task4 import cache
 
 
-def func(a: int, b: int):
-    return (a ** b) ** 2
-
-
 def test_default():
-    cache_func = cache(func)
+    num_calls = 0
+
+    @cache
+    def func(a: int, b: int):
+        nonlocal num_calls
+        num_calls += 1
+        return (a ** b) ** 2
     some = 100, 200
-    val1 = cache_func(*some)
-    val2 = cache_func(*some)
-    assert val1 is val2
-
-
-def build_list_range(stop: int):
-    return list(range(stop))
+    [func(*some) for i in range(10)]
+    assert num_calls == 1
 
 
 def test_own():
-    cache_func = cache(build_list_range)
+    num_calls = 0
+
+    @cache
+    def build_list_range(stop: int):
+        nonlocal num_calls
+        num_calls += 1
+        return list(range(stop))
     stop = 10
-    a = cache_func(stop)
-    b = cache_func(stop)
-    assert a is b
+    [build_list_range(stop) for i in range(100)]
+    assert num_calls == 1

@@ -24,16 +24,15 @@ def get_start_stop_step(*args):
 def custom_range(iterable: Iterable, *args):
     start, stop, step = get_start_stop_step(*args)
     start_idx, stop_idx = find_start_stop_idx(iterable, start, stop)
-    print(start_idx, stop_idx)
-    indexes = list(range(start_idx, stop_idx, step))
-    if step < 0:
+    indexes = list(range(start_idx, stop_idx, step))  # positions of elements
+    if step < 0:  # if negative we need to iterate backward
         indexes = list(reversed(indexes))
     i = 0
     result = []
     for j, item in enumerate(iterable):
-        if len(result) >= len(indexes):
+        if len(result) == len(indexes):
             break
-        if j == indexes[i]:
+        if j == indexes[i]:  # append if position of curr elem exist in indexes
             result.append(item)
             i += 1
     if step < 0:
