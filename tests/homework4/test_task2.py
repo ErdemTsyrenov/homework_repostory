@@ -1,7 +1,8 @@
-import pytest
 import urllib
-
 from unittest.mock import patch
+
+import pytest
+
 from homework4.task2 import count_dots_on_i
 
 
@@ -21,4 +22,3 @@ def test_without_i(webpage_emulation: str, answer: int):
         mock_urlopen.return_value = webpage_emulation
         print(urllib.request.urlopen())
         assert count_dots_on_i("https://example.com") == answer
-

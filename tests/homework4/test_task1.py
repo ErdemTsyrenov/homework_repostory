@@ -1,6 +1,6 @@
-import pytest
-
 from tempfile import NamedTemporaryFile
+
+import pytest
 
 from homework4.task1 import read_magic_number
 
@@ -30,7 +30,7 @@ def test_one_line_file_with_right_integer(file_content, expected):
 
 
 @pytest.mark.parametrize('file_content, expected', [('1\n232\n', True)])
-def test_one_line_file_with_right_integer(file_content, expected):
+def test_two_line_file_with_right_integer(file_content, expected):
     with NamedTemporaryFile(mode='w+t') as temp:
         temp.write(file_content)
         temp.seek(0)
