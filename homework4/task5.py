@@ -22,8 +22,8 @@ def fizzbuzz(n: int):
     >>> list(fizzbuzz(5))
     ['1', '2', 'fizz', '4', 'buzz']
     '''
-    ans = [str, lambda x: 'fizz', lambda x: 'buzz',
-           lambda x: 'fizzbuzz']
+    funcs = [lambda x: str(x), lambda x: 'fizz',
+             lambda x: 'buzz', lambda x: 'fizzbuzz']
     for number in range(1, n+1):
-        idx = int(divisible(number, 3)) + int(2*divisible(number, 5))
-        yield ans[idx](number)
+        func_id = int(divisible(number, 3)) + 2*int(divisible(number, 5))
+        yield funcs[func_id](number)

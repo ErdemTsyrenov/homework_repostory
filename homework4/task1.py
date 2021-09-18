@@ -28,9 +28,16 @@ You will learn:
 
 
 def read_magic_number(path: str) -> bool:
-    with open(path, 'r') as f:
-        value = int(f.readline())
-        if value >= 1 and value < 3:
-            return True
-        else:
-            return False
+    try:
+        with open(path, 'r') as f:
+            value = 0
+            try:
+                value = int(f.readline())
+            except ValueError as v_error:
+                print(v_error)
+            if value >= 1 and value < 3:
+                return True
+            else:
+                return False
+    except FileNotFoundError as f_error:
+        print(f_error)

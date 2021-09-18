@@ -18,13 +18,11 @@ You will learn:
  assert count_dots_on_i("https://example.com/") == 58
 * https://docs.python.org/3/library/urllib.request.html#urllib.request.urlopen
 """
-from urllib.request import urlopen
+import urllib.request
+from collections import Counter
 
 
 def count_dots_on_i(url: str) -> int:
-    num_i = 0
-    for line in urlopen(url):
-        for char in line:
-            if char == 'i':
-                num_i += 1
-    return num_i
+    print(urllib.request.urlopen(url))
+    webpage = str(urllib.request.urlopen(url))
+    return Counter(webpage)['i']
