@@ -2,7 +2,6 @@ import pytest
 
 import homework7.task1 as task
 
-
 example_tree1 = {
     "first": ["RED", "BLUE"],
     "second": {
