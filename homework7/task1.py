@@ -21,7 +21,7 @@ def find_occurrences_in_list_tuple_set(iterable, element):
             num += 1
         elif isinstance(item, dict):
             num += find_occurrences(item, element)
-        elif is_list_or_tuple_or_set(item) :
+        elif is_list_or_tuple_or_set(item):
             num += find_occurrences_in_list_tuple_set(item, element)
     return num
 
@@ -36,8 +36,3 @@ def find_occurrences(tree: dict, element: Any) -> int:
         elif is_list_or_tuple_or_set(tree[key]):
             num += find_occurrences_in_list_tuple_set(tree[key], element)
     return num
-
-
-
-if __name__ == '__main__':
-    print(find_occurrences(example_tree, "RED"))  # 6

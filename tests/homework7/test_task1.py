@@ -39,4 +39,3 @@ def test_simple_tree(test_data, element, expected):
                           (example_tree2, 'NotExist', 0)])
 def test_big_tree(test_data, element, expected):
     assert task.find_occurrences(test_data, element) == expected
-
