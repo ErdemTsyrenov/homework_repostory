@@ -14,10 +14,8 @@ from typing import Callable
 
 
 def merge_args(*args, **kwargs):
-    keys = sorted(kwargs.keys())
-    for k in keys:
-        args.append(kwargs[k])
-    return tuple(args)
+    kwargs = tuple(kwargs.items())
+    return frozenset(args+kwargs)
 
 
 def cache(f: Callable):
