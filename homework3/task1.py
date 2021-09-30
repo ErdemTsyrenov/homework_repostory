@@ -24,32 +24,19 @@ def f():
 ? 2
 '2'
 """
-from dataclasses import dataclass
-from typing import Any, Callable
-
-
-@dataclass
-class MemoryItem:
-    def __init__(self, val=None, times=None):
-        self.val = val
-        self.times = times
-
-    val: Any
-    times: int
+from typing import Callable
 
 
 def is_cached(arg, memory):
-    if arg in memory and memory[arg].times != 0:
+    if arg in memory and memory[arg][1] != 0:
         return True
     else:
         return False
 
 
 def merge_args(*args, **kwargs):
-    keys = sorted(kwargs.keys())
-    for k in keys:
-        args.append(kwargs[k])
-    return tuple(args)
+    kwargs = tuple(kwargs.items())
+    return frozenset(args+kwargs)
 
 
 def cache(times=1):
@@ -60,10 +47,9 @@ def cache(times=1):
         def inner(*args, **kwargs):
             arg = merge_args(*args, **kwargs)   # merge into hashable object
             if not is_cached(arg, memory):
-                memory[arg] = MemoryItem(val=f(*args, **kwargs),
-                                         times=times)
+                memory[arg] = [f(*args, **kwargs), times]
             else:
-                memory[arg].times -= 1
-            return memory[arg].val
+                memory[arg][1] -= 1
+            return memory[arg][0]
         return inner
     return wrapped
