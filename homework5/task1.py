@@ -51,8 +51,7 @@ class Student:
         self.last_name = last_name
         self.first_name = first_name
 
-    @staticmethod
-    def do_homework(homework: Homework) -> Homework:
+    def do_homework(self, homework: Homework) -> Homework:
         if homework.is_active():
             return homework
         else:
@@ -65,6 +64,5 @@ class Teacher:
         self.last_name = last_name
         self.first_name = first_name
 
-    @staticmethod
-    def create_homework(text: str, days_to_complete: int) -> Homework:
+    def create_homework(self, text: str, days_to_complete: int) -> Homework:
         return Homework(text, days_to_complete)

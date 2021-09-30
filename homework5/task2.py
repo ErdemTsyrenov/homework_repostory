@@ -15,34 +15,22 @@ print(custom_sum.__name__)  # 'custom_sum'
 print(custom_sum.__original_func)  # <function custom_sum at <some_id>>
 """
 
-from typing import Callable
 
-
-class FuncInfo:
-    def __init__(self, __name__, __doc__, __original_func__, wrapped):
-        self.__original_func__ = __original_func__
-        self.__name__ = __name__
-        self.__doc__ = __doc__
-        self.wrapped = wrapped
-
-    def __call__(self, *args, **kwargs):
-        return self.wrapped(*args, **kwargs)
-
-
-def save_func_data(func: Callable, func_to_save: Callable = None):
-    func_info = FuncInfo(func_to_save.__name__, func_to_save.__doc__,
-                         func_to_save, func)
-    return func_info
+def save_func(func_to_save):
+    def wrapper(func_to_wrap):
+        func_to_wrap.__doc__ = func_to_save.__doc__
+        func_to_wrap.__name__ = func_to_save.__name__
+        setattr(func_to_wrap, '__original_func__', func_to_save)
+        return func_to_wrap
+    return wrapper
 
 
 def print_result(func):
     # Place for new decorator
-    def save_func():
-        def wrapper(*args, **kwargs):
-            """Function-wrapper which print result of an original function"""
-            result = func(*args, **kwargs)
-            print(result)
-            return result
-        func_info = FuncInfo(func.__name__, func.__doc__, func, wrapper)
-        return func_info
-    return save_func()
+    @save_func(func)
+    def wrapper(*args, **kwargs):
+        """Function-wrapper which print result of an original function"""
+        result = func(*args, **kwargs)
+        print(result)
+        return result
+    return wrapper
