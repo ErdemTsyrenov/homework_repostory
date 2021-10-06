@@ -18,7 +18,8 @@ def test_one_line_file_with_letters(file_content):
     with NamedTemporaryFile(mode='w+t') as temp:
         temp.write(file_content)
         temp.seek(0)
-        read_magic_number(temp.name)
+        with pytest.raises(ValueError):
+            read_magic_number(temp.name)
 
 
 @pytest.mark.parametrize('file_content, expected', [('1\n', True)])
@@ -38,4 +39,5 @@ def test_two_line_file_with_right_integer(file_content, expected):
 
 
 def test_non_exist_file():
-    read_magic_number('example.txt')
+    with pytest.raises(FileNotFoundError):
+        read_magic_number('example.txt')
