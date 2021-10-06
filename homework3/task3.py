@@ -75,7 +75,6 @@ def make_filter(**keywords):
     # Generate filter object for specified keywords
     filter_funcs = []
     for key, value in keywords.items():
-        print(key, value)
 
         def keyword_filter_func(key, value):
             def inner(arg):
